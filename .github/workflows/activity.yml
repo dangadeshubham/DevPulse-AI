@@ -1,10 +1,6 @@
 name: DevPulse Activity Bot
 
 on:
-  schedule:
-    - cron: "0 6 * * *"
-    - cron: "0 12 * * *"
-    - cron: "45 15 * * *"
   workflow_dispatch:
 
 jobs:
@@ -20,17 +16,20 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install dependencies
+      - name: Install pytz
         run: |
           python -m pip install --upgrade pip
           pip install pytz
 
+      - name: Verify pytz installed
+        run: python -c "import pytz; print('pytz installed')"
+
       - name: Run commit script
         run: python commit.py
 
-      - name: Commit and push changes
+      - name: Commit and push
         run: |
-          git config --global user.name "DevPulse AI"
+          git config --global user.name "Shubham Dangade"
           git config --global user.email "shubhamdangade01@gmail.com"
           git add .
           git commit -m "Automated commit by DevPulse AI" || echo "No changes"
