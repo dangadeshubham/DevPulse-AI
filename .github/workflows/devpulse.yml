@@ -15,6 +15,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0   # IMPORTANT (fix push issue)
 
       - name: Setup Python
         uses: actions/setup-python@v4
@@ -32,7 +34,7 @@ jobs:
       - name: Run commit script
         run: python commit.py
 
-      - name: Commit & Push
+      - name: Commit & Push (FIXED)
         run: |
           git config --global user.name "Shubham Dangade"
           git config --global user.email "shubhamdangade01@gmail.com"
