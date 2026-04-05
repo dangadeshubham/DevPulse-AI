@@ -1,11 +1,6 @@
-name: DevPulse Fresh Bot
+name: DevPulse Manual Bot
 
 on:
-  schedule:
-    - cron: '0 4 * * *'   # 9:30 AM IST
-    - cron: '30 7 * * *'  # 1:00 PM IST
-    - cron: '0 12 * * *'  # 5:30 PM IST
-    - cron: '30 15 * * *' # 9:00 PM IST
   workflow_dispatch:
 
 jobs:
@@ -28,20 +23,16 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Debug check
-        run: python -c "import pytz; print('pytz OK')"
-
       - name: Run commit script
         run: python commit.py
 
-      - name: Commit & Push (FINAL FIXED VERSION)
+      - name: Commit & Push
         run: |
           git config --global user.name "Shubham Dangade"
           git config --global user.email "shubhamdangade01@gmail.com"
 
           git add .
-          git commit -m "Auto commit by DevPulse" || echo "No changes"
+          git commit -m "Manual DevPulse commit" || echo "No changes"
 
           git pull origin main --rebase
-
           git push origin main
