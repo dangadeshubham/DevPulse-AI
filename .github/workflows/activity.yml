@@ -1,0 +1,32 @@
+name: DevPulse Activity Bot
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+    - cron: "0 12 * * *"
+    - cron: "45 15 * * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Run commit script
+        run: python commit.py
+
+      - name: Commit & Push changes
+        run: |
+          git config --global user.name "DevPulse AI"
+          git config --global user.email "your-email@example.com"
+          git add .
+          git commit -m "Automated commit by DevPulse AI" || echo "No changes"
+          git push
