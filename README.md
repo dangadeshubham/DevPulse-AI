@@ -95,7 +95,6 @@ green-squares-bot/
 ```
 
 ---
-
 ## 🤝 Contributing
 
 Contributions are welcome! 🎉  
